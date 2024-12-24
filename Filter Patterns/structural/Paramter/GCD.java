@@ -1,0 +1,24 @@
+package pattern_pool.llmPrefilterPatterns.structural.v1.i0;
+
+import pattern.description.PatternMatchingDescriptionImpl;
+import pattern.description.chain.BindingExportConfiguration;
+import pattern.description.chain.PatternMatchingDescriptionChain;
+import pattern.description.chain.PatternMatchingDescriptionChainBuilder;
+import pattern.dsl.marker.DslNode;
+
+import static pattern.dsl.DSL.*;
+
+public class GCD {
+    public static final PatternMatchingDescriptionChain CHAIN = PatternMatchingDescriptionChainBuilder
+            .create("GCD")
+            .defaultExport(new BindingExportConfiguration(true).addAll("method"))
+            .add("main", new PatternMatchingDescriptionImpl(getPattern(specification())))
+            .build();
+
+
+    private static DslNode specification() {
+        return oneOf()
+                .add(method().rootBind("m").parameters(parameter().type(type().INT), parameter().type(type().INT)))
+                .add(method().rootBind("m").parameters(parameter().type(type().LONG), parameter().type(type().LONG)));
+    }
+}
